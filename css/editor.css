@@ -1,0 +1,54 @@
+.inline-block {
+  display: inline-block;
+  box-sizing: border-box;
+}
+.message-left {
+  min-width: 25%;
+  text-align: right;
+}
+.message-left + span {
+  padding-left: 0.5em;
+  margin-left: 0.5em;
+  border-left: 1px solid #fff;
+}
+
+.output pre {
+  white-space: nowrap;
+  overflow-x: auto;
+  margin: 4px;
+}
+.underline { text-decoration: underline; }
+.bold { font-weight: bold; }
+
+.event + .event {
+  border-top: 1px solid #ccc;
+}
+
+body {
+  padding-top: 40px;
+}
+
+@media (min-width: 768px) {
+  .event {
+    padding: 0;
+  }
+  
+  .name, .message {
+    padding: 1em;
+  }
+  .output {
+    padding: 0;
+    height: 100%;
+  }
+  .output pre {
+    padding: 1em;
+    border-radius: 0;
+    height: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .event {
+    padding: 1em;
+  }
+}

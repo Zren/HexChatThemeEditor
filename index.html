@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Javascript: Libaries -->
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap.js"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="http://twitter.github.io/bootstrap/assets/css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" />
+  <link rel="stylesheet" type="text/css" href="css/editor.css" />
+  <!-- Meta -->
+  <meta charset=utf-8 />
+  <title>HexChat: Text Event Editor</title>
+
+</head>
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="">
+        <a class="brand" href="#">HexChat: Text Event Editor</a>
+        <div class="pull-right">
+          <button id="defaults" class="btn">Defaults</button>
+          <button id="open-import" class="btn" href="#myModal" role="button" data-toggle="modal">Import</button>
+          <button id="export" class="btn btn-primary">Export</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="">
+    <div id="events"></div>
+  </div>
+  
+  <!-- Modal -->
+  <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Import</h3>
+      </div>
+      <div class="modal-body">
+        <fieldset>
+        <form class="dropzone">
+          <legend>HexChat/config/pevents.conf</legend>
+          <input type="file" id="file_pevents_conf" />
+          <legend>HexChat/config/colors.conf</legend>
+          <input type="file" id="file_colors_conf" />
+        </form>
+        </fieldset>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button id="import" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Import</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Javacript: After Load -->
+  <script src="js/hexchat_events.js"></script>
+  <script src="js/editor.js"></script>
+</body>
+</html>
