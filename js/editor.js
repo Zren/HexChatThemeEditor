@@ -180,17 +180,21 @@ function parsePEventConf(str) {
   }
 }
 
+function hex16ToHex8(hex16) {
+  return Math.round(parseInt(hex16, 16) / 0xff).toString(16);
+}
+
 function parseColorsConf(str) {
   if (!str) {
     console.log('parseColorsConf', 'Skipped importing this file');
     return; // File was not imported;
   }
   
-  var re = /color_(\d+) = (\w{2})\w{2} (\w{2})\w{2} (\w{2})\w{2}/g;
+  var re = /color_(\d+) = (\w{4}) (\w{4}) (\w{4})/g;
   var result;
   var color_map = {};
   while ((result = re.exec(str)) !== null) {
-    color_map[result[1]] = "#" + result[2] + result[3] + result[4];
+    color_map[result[1]] = "#" + hex16ToHex8(result[2]) + hex16ToHex8(result[3]) + hex16ToHex8(result[4]);
   }
   setColors(color_map);
 }
