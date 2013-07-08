@@ -1,21 +1,26 @@
 .inline-block {
-  display: inline-block;
-  box-sizing: border-box;
 }
 .message-left {
   min-width: 25%;
   text-align: right;
+  display: inline-block;
+  box-sizing: border-box;
 }
-.message-left + span {
+.message-right {
+  display: inline;
+  box-sizing: border-box;
   padding-left: 0.5em;
   margin-left: 0.5em;
   border-left: 1px solid #fff;
 }
 
 .output pre {
-  white-space: nowrap;
   overflow-x: auto;
   margin: 4px;
+}
+.output pre span {
+  white-space: pre;
+  overflow-x: auto;
 }
 .underline { text-decoration: underline; }
 .bold { font-weight: bold; }
@@ -26,6 +31,16 @@
 
 body {
   padding-top: 40px;
+}
+
+.navbar-fixed-top .navbar-inner {
+  padding: 0 1em;
+}
+
+@media (max-width: 979px) {
+  body {
+    padding-top: 0;
+  }
 }
 
 @media (min-width: 768px) {

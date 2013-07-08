@@ -1,48 +1,3 @@
-var default_color_map = {
-  0: "#ffffff",
-  1: "#49483e",
-  2: "#66d9ef",
-  3: "#6bc72b",
-  4: "#f92672",
-  5: "#77543e",
-  6: "#9459ff",
-  7: "#fd971f",
-  8: "#e6db74",
-  9: "#a6e22e",
-  10: "#35b091",
-  11: "#66efd5",
-  12: "#66d9ef",
-  13: "#ae81ff",
-  14: "#75715e",
-  15: "#cfcfc2",
-  16: "#ffffff",
-  17: "#49483e",
-  18: "#66d9ef",
-  19: "#6bc72b",
-  20: "#f92672",
-  21: "#77533e",
-  22: "#9459ff",
-  23: "#fd971f",
-  24: "#e6db74",
-  25: "#a6e22e",
-  26: "#35b091",
-  27: "#66efd5",
-  28: "#66d9ef",
-  29: "#ae81ff",
-  30: "#75715e",
-  31: "#cfcfc2",
-  256: "#f8f8f2",
-  257: "#000000",
-  258: "#cfcfc2",
-  259: "#131313",
-  260: "#ff0000",
-  261: "#888888",
-  262: "#ffaa00",
-  263: "#85a83f",
-  264: "#75715e",
-  265: "#f92672"
-};
-
 var events;
 
 function setColors(color_map) {
@@ -63,7 +18,7 @@ function buildEditor(events) {
     $event.attr('data-event', event_name);
     $event.append($('<label class="span2 name" />'));
     $event.append($('<span class="span5 message"><input class="input-block-level" /></span>'));
-    $event.append($('<span class="span5 output"><pre class=" fg256 bg259" /></span>'));
+    $event.append($('<span class="span5 output"><pre class="fg256 bg259" /></span>'));
     //$event.append($(''));
     //$event.html('');
     $event.find('.name').text(event_name);
@@ -107,7 +62,7 @@ function buildEditor(events) {
     
     // Seperator
     message = message.replace(/\$t/g, function(match, offset, string) {
-      return '</span></span><span class="inline-block"><span>';
+      return '</span></span><span class="message-right"><span>';
     });
     
     // Variables Tooltips
@@ -116,11 +71,10 @@ function buildEditor(events) {
       return '<span rel="tooltip" data-placement="bottom" title="' + help_text + '">' + text + '</span>';
     });
     
-    message = '<span class="message-left inline-block"><span>' + message + '</span></span>';
+    message = '<span class="message-left"><span>' + message + '</span></span>';
     $event.find('.output pre').html(message);
+    $event.find('[rel=tooltip]').tooltip();
   });
-  
-  $('[rel=tooltip]').tooltip();
   
   $('#events .event .message input').popover({
     trigger: 'focus',
@@ -135,6 +89,17 @@ function buildEditor(events) {
         list.append($('<li />').append(help_text));
       });
       return list;
+    },
+    placement: function(popover, target) {
+      var vpH = $(window).height(), // Viewport Height
+          st = $(window).scrollTop(), // Scroll Top
+          y = $(target).offset().top;
+      
+      if (y < st + vpH/2) { // onTopHalfOfWindow
+        return 'bottom';
+      } else {
+        return 'top';
+      }
     }
   });
   
