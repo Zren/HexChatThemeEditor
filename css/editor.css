@@ -14,6 +14,19 @@
   border-left: 1px solid #fff;
 }
 
+.message input {
+  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+}
+
+input[type="file"] {
+  width: 100%;
+  height: 100%;
+  background: #eee;
+  border-radius: 1em;
+  padding: 1em;
+  box-sizing: border-box;
+}
+
 .output pre {
   overflow-x: auto;
   margin: 4px;

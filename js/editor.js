@@ -109,6 +109,11 @@ function buildEditor(events) {
     importPEventConf();
     importColorsConf();
   });
+
+  $('.nav-tabs li:not(.disabled) a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+  })
   
   $('#export').click(function(){
     var output = '';
@@ -118,7 +123,8 @@ function buildEditor(events) {
       output += 'event_name='+event_name+'\n';
       output += 'event_text='+event_text+'\n\n';
     });
-    window.open('data:text/plain;charset=utf-8,' + encodeURIComponent(output));
+    var dataUri = 'data:text/plain;charset=utf-8,' + encodeURIComponent(output);
+    this.href = dataUri;
   });
 }
 
@@ -146,11 +152,15 @@ function setDefaults() {
 }
 
 function importPEventConf() {
-  importFile('#file_pevents_conf', parsePEventConf);
+  var selector = '#file_pevents_conf';
+  importFile(selector, parsePEventConf);
+  $(selector).val('');
 }
 
 function importColorsConf() {
-  importFile('#file_colors_conf', parseColorsConf);
+  var selector = '#file_colors_conf';
+  importFile(selector, parseColorsConf);
+  $(selector).val('');
 }
 
 function polulateEvent(event_name, event_text) {
@@ -181,7 +191,8 @@ function parsePEventConf(str) {
 }
 
 function hex16ToHex8(hex16) {
-  return Math.round(parseInt(hex16, 16) / 0xff).toString(16);
+  // The actual editor in HexChat rounds up sometimes, but this should be close enough.
+  return hex16.substr(0,2);
 }
 
 function parseColorsConf(str) {

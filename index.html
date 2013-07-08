@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Javascript: Libaries -->
-  <script src="http://code.jquery.com/jquery.min.js"></script>
-  <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap.js"></script>
+  <!-- Meta -->
+  <meta charset=utf-8 />
+  <title>HexChat: Text Event Editor</title>
 
   <!-- CSS -->
   <link rel="stylesheet" type="text/css" href="http://twitter.github.io/bootstrap/assets/css/bootstrap.css" />
   <link rel="stylesheet" type="text/css" href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" />
   <link rel="stylesheet" type="text/css" href="css/editor.css" />
-  <!-- Meta -->
-  <meta charset=utf-8 />
-  <title>HexChat: Text Event Editor</title>
-
 </head>
 <body>
   <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,7 +18,7 @@
         <div class="pull-right">
           <button id="defaults" class="btn">Defaults</button>
           <button id="open-import" class="btn" href="#myModal" role="button" data-toggle="modal">Import</button>
-          <button id="export" class="btn btn-primary">Export</button>
+          <a id="export" class="btn btn-primary" download="pevents.conf" target="_blank">Export</a>
         </div>
       </div>
     </div>
@@ -33,29 +29,74 @@
   
   <!-- Modal -->
   <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Import</h3>
       </div>
       <div class="modal-body">
-        <fieldset>
-        <form class="dropzone">
-          <legend>HexChat/config/pevents.conf</legend>
-          <input type="file" id="file_pevents_conf" />
-          <legend>HexChat/config/colors.conf</legend>
-          <input type="file" id="file_colors_conf" />
+        <form class="form-horizontal">
+          <fieldset>
+            <ul class="nav nav-tabs" id="importTab">
+              <li class="active"><a href="#import_conf">*.conf</a></li>
+              <li class="disabled"><a href="#">*.hct (TODO)</a></li>
+            </ul>
+            <div class="tab-content">
+              <!-- import_conf -->
+              <div class="tab-pane active" id="import_conf">
+                <p>Can be found in you HexChat Install directory. For example:</p>
+                <p><code>C:\Program Files (x86)\HexChat\config\</code></p>
+                <p><code>C:\Program Files\HexChat\config\</code></p>
+
+                <!-- file_pevents_conf --> 
+                <div class="control-group">
+                  <label class="control-label" for="file_pevents_conf">pevents.conf</label>
+                  <div class="controls">
+                    <input id="file_pevents_conf" name="file_pevents_conf" class="input-file" type="file">
+                  </div>
+                </div>
+
+                <!-- file_colors_conf --> 
+                <div class="control-group">
+                  <label class="control-label" for="file_colors_conf">colors.conf</label>
+                  <div class="controls">
+                    <input id="file_colors_conf" name="file_colors_conf" class="input-file" type="file">
+                  </div>
+                </div>  
+              </div>
+
+              <!-- import_hct -->
+              <div class="tab-pane" id="import_hct">
+                <!-- File Button --> 
+                <div class="control-group">
+                  <label class="control-label" for="file_hct">Local File:</label>
+                  <div class="controls">
+                    <input id="file_hct" name="file_hct" class="input-file" type="file">
+                  </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="control-group">
+                  <label class="control-label" for="url_hct">Web (Url):</label>
+                  <div class="controls">
+                    <input id="url_hct" name="url_hct" type="url" placeholder="Url" class="input-xlarge">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </fieldset>
         </form>
-        </fieldset>
       </div>
       <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
         <button id="import" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Import</button>
       </div>
-    </form>
   </div>
 
-  <!-- Javacript: After Load -->
+  <!-- Javascript: After Load -->
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap.js"></script>
+  <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-tab.js"></script>
   <script src="js/hexchat_colors.js"></script>
   <script src="js/hexchat_events.js"></script>
   <script src="js/editor.js"></script>
