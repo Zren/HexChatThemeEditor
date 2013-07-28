@@ -18,7 +18,7 @@ function buildEditor(events) {
     $event.attr('data-event', event_name);
     $event.append($('<label class="span2 name" />'));
     $event.append($('<span class="span5 message"><input class="input-block-level" /></span>'));
-    $event.append($('<span class="span5 output"><pre class="fg256 bg259" /></span>'));
+    $event.append($('<span class="span5 output"><pre class="fg258 bg259" /></span>'));
     //$event.append($(''));
     //$event.html('');
     $event.find('.name').text(event_name);
@@ -146,9 +146,16 @@ function importFile(selector, callback) {
   reader.readAsText(file);
 }
 
+function loadDefaultColorsConf() {
+  $.get('assets/colors.conf', function(data) {
+    parseColorsConf(data);
+  });
+}
+
 function setDefaults() {
   populateEventsUsingDefaults(events);
   setColors(default_color_map);
+  loadDefaultColorsConf();
 }
 
 function importPEventConf() {
